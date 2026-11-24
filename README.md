@@ -24,6 +24,14 @@ npx skills add indrazm/personal-skills --skill code-review
 
 ### Engineering & Quality
 
+#### `zstack-mode` *(manual invocation only)*
+
+Runs an interactive, gated task loop: asks what task to execute, enforces `code-review` and `changes-verification` after every completed task, and prompts to open a PR via `create-pr` when approved. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+
+**Use when:**
+
+- Explicitly invoked to run tasks through the full review → verify → optional PR loop
+
 #### `code-review`
 
 Performs multi-axis code review across correctness, readability, architecture, security, and performance by delegating to an independent subagent. Includes a detailed review checklist in `references/review-checklist.md`.
@@ -137,10 +145,12 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── SKILL.md
     │   └── references/
     │       └── patterns.md
-    └── optimize-ci/
-        ├── SKILL.md
-        └── scripts/
-            └── audit_ci.py
+    ├── optimize-ci/
+    │   ├── SKILL.md
+    │   └── scripts/
+    │       └── audit_ci.py
+    └── zstack-mode/
+        └── SKILL.md
 ```
 
 Each skill directory contains:

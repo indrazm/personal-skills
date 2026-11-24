@@ -6,6 +6,7 @@
       "title": "Engineering & Quality",
       "description": "Workflows for code review, root-cause debugging, pre-PR verification, pull requests, and architecture decision records.",
       "skills": [
+        "zstack-mode",
         "code-review",
         "debugging",
         "changes-verification",
