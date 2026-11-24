@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Git pre-push hook enforcing changes-verification receipt for HEAD.
+# Git pre-push hook enforcing changes-verification receipt for HEAD (pure Bash).
 set -euo pipefail
 
 RECEIPT_FILE=".changes-verification-receipt.json"
@@ -10,28 +10,27 @@ if [[ ! -f "$RECEIPT_FILE" ]]; then
   exit 1
 fi
 
-python3 - "$RECEIPT_FILE" "$HEAD_SHA" << 'EOF'
-import json
-import sys
+if command -v jq >/dev/null 2>&1; then
+  RECEIPT_SHA="$(jq -r '.commit_sha // ""' "$RECEIPT_FILE" 2>/dev/null || true)"
+  RECEIPT_PASSED="$(jq -r 'if .passed == true then "true" else "false" end' "$RECEIPT_FILE" 2>/dev/null || true)"
+else
+  RECEIPT_SHA="$(awk -F'"' '/"commit_sha"[[:space:]]*:/ { print $4; exit }' "$RECEIPT_FILE")"
+  RECEIPT_PASSED="$(awk '/"passed"[[:space:]]*:[[:space:]]*true/ { val="true" } END { print (val == "true" ? "true" : "false") }' "$RECEIPT_FILE")"
+fi
 
-receipt_path, head_sha = sys.argv[1], sys.argv[2]
-try:
-    data = json.loads(open(receipt_path, encoding="utf-8").read())
-except Exception as exc:
-    print(f"ERROR: Could not parse {receipt_path}: {exc}", file=sys.stderr)
-    sys.exit(1)
+if [[ -z "$RECEIPT_SHA" ]]; then
+  echo "ERROR: Could not parse commit_sha from $RECEIPT_FILE." >&2
+  exit 1
+fi
 
-if data.get("commit_sha") != head_sha:
-    print(
-        f"ERROR: Verification receipt is for {data.get('commit_sha')}, "
-        f"but HEAD is {head_sha}. Re-run changes-verification.",
-        file=sys.stderr,
-    )
-    sys.exit(1)
+if [[ "$RECEIPT_SHA" != "$HEAD_SHA" ]]; then
+  echo "ERROR: Verification receipt is for $RECEIPT_SHA, but HEAD is $HEAD_SHA. Re-run changes-verification." >&2
+  exit 1
+fi
 
-if data.get("passed") is not True:
-    print("ERROR: Changes verification did not pass. Fix failures and re-run.", file=sys.stderr)
-    sys.exit(1)
+if [[ "$RECEIPT_PASSED" != "true" ]]; then
+  echo "ERROR: Changes verification did not pass. Fix failures and re-run." >&2
+  exit 1
+fi
 
-print(f"Changes verification receipt confirmed for {head_sha}.")
-EOF
+echo "Changes verification receipt confirmed for $HEAD_SHA."

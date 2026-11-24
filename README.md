@@ -26,7 +26,7 @@ npx skills add indrazm/personal-skills --skill code-review
 
 #### `zstack-mode` *(manual invocation only)*
 
-Runs an interactive, gated task loop: asks what task to execute and whether backward compatibility is needed (default: `no`), applies preferred architecture conventions from `references/code-structure.md`, enforces `code-review` and `changes-verification` via `scripts/zstack_gate.py` (with optional Antigravity/Claude Code/Git hook templates in `references/hooks-setup.md`), and prompts to open a PR via `create-pr` when approved. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+Runs an interactive, gated task loop: asks what task to execute and whether backward compatibility is needed (default: `no`), applies preferred architecture conventions from `references/code-structure.md`, enforces `code-review` and `changes-verification` via `scripts/zstack_gate.sh` (with optional Antigravity, Codex, Claude Code, OpenCode, Pi, and Git hook templates in `references/hooks-setup.md`), and prompts to open a PR via `create-pr` when approved. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
 
 **Use when:**
 
@@ -63,7 +63,7 @@ Audits, gates, and prunes unit and E2E tests so suites only keep meaningful, cri
 
 #### `changes-verification`
 
-Enforces deterministic pre-PR verification by discovering changed files and CI workflows, running change-related tests and locally runnable CI checks via `scripts/verify.py`, and writing a commit-bound verification receipt enforced by `scripts/pre-push-hook.sh`.
+Enforces deterministic pre-PR verification by discovering changed files and CI workflows, running change-related tests and locally runnable CI checks via `scripts/verify.sh`, and writing a commit-bound verification receipt enforced by `scripts/pre-push-hook.sh`.
 
 **Use when:**
 
@@ -82,7 +82,7 @@ Creates pull requests after enforcing a mandatory `changes-verification` gate, v
 
 #### `engineering-decision`
 
-Records, updates, and supersedes engineering and architectural decisions in `docs/decision/` as numbered Markdown files (ADRs) with bidirectional lifecycle tracking. Includes `scripts/adr.py` for deterministic listing/scaffolding and `references/adr-template.md`.
+Records, updates, and supersedes engineering and architectural decisions in `docs/decision/` as numbered Markdown files (ADRs) with bidirectional lifecycle tracking. Includes `scripts/adr.sh` for deterministic listing/scaffolding and `references/adr-template.md`.
 
 **Use when:**
 
@@ -92,7 +92,7 @@ Records, updates, and supersedes engineering and architectural decisions in `doc
 
 #### `optimize-ci` *(manual invocation only)*
 
-Audits the last 150 GitHub Actions runs via `scripts/audit_ci.py` and optimizes CI pipelines toward sub-1-minute p50 and sub-2-minute p95 PR checks without hiding failures or reducing coverage. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+Audits the last 150 GitHub Actions runs via `scripts/audit_ci.sh` and optimizes CI pipelines toward sub-1-minute p50 and sub-2-minute p95 PR checks without hiding failures or reducing coverage. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
 
 **Use when:**
 
@@ -132,7 +132,7 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── SKILL.md
     │   └── scripts/
     │       ├── pre-push-hook.sh
-    │       └── verify.py
+    │       └── verify.sh
     ├── code-review/
     │   ├── SKILL.md
     │   └── references/
@@ -146,7 +146,7 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── references/
     │   │   └── adr-template.md
     │   └── scripts/
-    │       └── adr.py
+    │       └── adr.sh
     ├── micro-animation/
     │   ├── SKILL.md
     │   └── references/
@@ -158,7 +158,7 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     ├── optimize-ci/
     │   ├── SKILL.md
     │   └── scripts/
-    │       └── audit_ci.py
+    │       └── audit_ci.sh
     ├── test-audit/
     │   ├── SKILL.md
     │   └── references/
@@ -170,7 +170,7 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
         │   ├── code-structure.md
         │   └── hooks-setup.md
         └── scripts/
-            └── zstack_gate.py
+            └── zstack_gate.sh
 ```
 
 Each skill directory contains:

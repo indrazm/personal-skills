@@ -22,7 +22,7 @@ Make the repository's CI as fast as possible without letting it lie.
 Before changing any workflow or toolchain, pull the last 150 CI runs via the GitHub CLI (`gh`). Resolve `<skill-dir>` to the directory containing this `SKILL.md` and run:
 
 ```bash
-python3 <skill-dir>/scripts/audit_ci.py --limit 150
+bash <skill-dir>/scripts/audit_ci.sh --limit 150
 ```
 
 Output a Markdown table breaking down every job into **Waiting**, **Setup**, and **Running** durations at **p50** and **p95**. Always fix the biggest bottleneck bucket first.

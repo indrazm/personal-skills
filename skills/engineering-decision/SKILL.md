@@ -32,7 +32,7 @@ docs/decision/
 
 Every decision action MUST account for existing records in `docs/decision/`:
 
-1. **Inspect existing decisions first:** Run `scripts/adr.py list` (or read all files in `docs/decision/`) before proposing or writing a new decision so you do not contradict active decisions or repeat rejected options without new context.
+1. **Inspect existing decisions first:** Run `scripts/adr.sh list` (or read all files in `docs/decision/`) before proposing or writing a new decision so you do not contradict active decisions or repeat rejected options without new context.
 2. **Use strict status values:**
    - `Proposed` — Under discussion, not yet finalized.
    - `Accepted` — Active decision currently in effect.
@@ -49,13 +49,13 @@ Resolve `<skill-dir>` to the directory containing this `SKILL.md`.
 
 1. **List existing decisions:**
    ```bash
-   python3 <skill-dir>/scripts/adr.py list
+   bash <skill-dir>/scripts/adr.sh list
    ```
    Read any active, proposed, or overlapping decision files in full.
 2. **Check for conflicts or supersession:** Determine whether the new decision extends, supersedes, deprecates, or cancels an existing record.
 3. **Scaffold the next numbered ADR:**
    ```bash
-   python3 <skill-dir>/scripts/adr.py new "Use PostgreSQL for primary storage"
+   bash <skill-dir>/scripts/adr.sh new "Use PostgreSQL for primary storage"
    ```
    Fill in all sections (`Context`, `Decision`, `Alternatives Considered`, `Consequences`) following `references/adr-template.md`.
 4. **Update affected prior records:** If replacing, deprecating, or canceling an older decision, update its metadata header and add a brief status note (see `references/adr-template.md` for the exact format).
