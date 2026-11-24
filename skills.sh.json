@@ -9,6 +9,7 @@
         "zstack-mode",
         "code-review",
         "debugging",
+        "test-audit",
         "changes-verification",
         "create-pr",
         "engineering-decision",

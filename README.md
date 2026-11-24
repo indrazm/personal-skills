@@ -4,7 +4,7 @@ My personal collection of reusable skills for AI coding agents—covering the en
 
 Built on the [Agent Skills](https://agentskills.io/) specification and installable via [skills.sh](https://skills.sh/).
 
-[![skills.sh](https://skills.sh/b/indrazm/personal-skills)](https://skills.sh/indrazm/personal-skills)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Installation
 
@@ -26,7 +26,7 @@ npx skills add indrazm/personal-skills --skill code-review
 
 #### `zstack-mode` *(manual invocation only)*
 
-Runs an interactive, gated task loop: asks what task to execute, enforces `code-review` and `changes-verification` after every completed task, and prompts to open a PR via `create-pr` when approved. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+Runs an interactive, gated task loop: asks what task to execute and whether backward compatibility is needed (default: `no`), applies preferred architecture conventions from `references/code-structure.md`, enforces `code-review` and `changes-verification` via `scripts/zstack_gate.py` (with optional Antigravity/Claude Code/Git hook templates in `references/hooks-setup.md`), and prompts to open a PR via `create-pr` when approved. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
 
 **Use when:**
 
@@ -51,6 +51,15 @@ Performs systematic, bird's-eye root-cause debugging instead of patching downstr
 - Tests fail or builds break
 - Runtime behavior diverges from expectations
 - Regressions or unexpected errors appear
+
+#### `test-audit`
+
+Audits, gates, and prunes unit and E2E tests so suites only keep meaningful, critical behavioral proof—rejecting on-screen text/copy checks, string change-detector tests, duplicate layer coverage, and test-only production seams. Includes `references/audit-workflow.md` and `references/pruning-campaign.md`.
+
+**Use when:**
+
+- Writing, changing, or reviewing unit or E2E tests
+- Auditing or pruning low-value, flaky, or change-detector tests from a codebase
 
 #### `changes-verification`
 
@@ -115,6 +124,7 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
 
 ```text
 .
+├── LICENSE
 ├── README.md
 ├── skills.sh.json
 └── skills/
@@ -149,8 +159,18 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── SKILL.md
     │   └── scripts/
     │       └── audit_ci.py
+    ├── test-audit/
+    │   ├── SKILL.md
+    │   └── references/
+    │       ├── audit-workflow.md
+    │       └── pruning-campaign.md
     └── zstack-mode/
-        └── SKILL.md
+        ├── SKILL.md
+        ├── references/
+        │   ├── code-structure.md
+        │   └── hooks-setup.md
+        └── scripts/
+            └── zstack_gate.py
 ```
 
 Each skill directory contains:
@@ -161,4 +181,4 @@ Each skill directory contains:
 
 ## License
 
-MIT
+[MIT](LICENSE)

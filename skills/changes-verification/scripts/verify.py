@@ -113,7 +113,11 @@ def main() -> int:
     head_sha = head_res.stdout.strip()
 
     status_res = run_git(["status", "--short"], repo_root)
-    dirty_files = [line for line in status_res.stdout.splitlines() if line.strip()]
+    dirty_files = [
+        line
+        for line in status_res.stdout.splitlines()
+        if line.strip() and line.strip() != "?? .changes-verification-receipt.json"
+    ]
 
     base_ref = detect_base_ref(repo_root, args.base)
     if base_ref:

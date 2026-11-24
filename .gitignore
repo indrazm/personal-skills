@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 node_modules/
 .changes-verification-receipt.json
+.zstack-state.json
