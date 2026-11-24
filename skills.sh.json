@@ -10,7 +10,8 @@
         "debugging",
         "changes-verification",
         "create-pr",
-        "engineering-decision"
+        "engineering-decision",
+        "optimize-ci"
       ]
     },
     {

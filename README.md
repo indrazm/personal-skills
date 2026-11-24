@@ -73,6 +73,14 @@ Records, updates, and supersedes engineering and architectural decisions in `doc
 - Evaluating trade-offs between engineering approaches
 - Superseding, deprecating, or canceling a prior decision
 
+#### `optimize-ci` *(manual invocation only)*
+
+Audits the last 150 GitHub Actions runs via `scripts/audit_ci.py` and optimizes CI pipelines toward sub-1-minute p50 and sub-2-minute p95 PR checks without hiding failures or reducing coverage. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+
+**Use when:**
+
+- Explicitly invoked to audit and speed up repository CI pipelines
+
 ### Frontend & UI
 
 #### `micro-animation`
@@ -125,10 +133,14 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── SKILL.md
     │   └── references/
     │       └── easing-and-patterns.md
-    └── optimistic-ui/
+    ├── optimistic-ui/
+    │   ├── SKILL.md
+    │   └── references/
+    │       └── patterns.md
+    └── optimize-ci/
         ├── SKILL.md
-        └── references/
-            └── patterns.md
+        └── scripts/
+            └── audit_ci.py
 ```
 
 Each skill directory contains:
