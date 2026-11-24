@@ -1,0 +1,25 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Engineering & Quality",
+      "description": "Workflows for code review, root-cause debugging, pre-PR verification, pull requests, and architecture decision records.",
+      "skills": [
+        "code-review",
+        "debugging",
+        "changes-verification",
+        "create-pr",
+        "engineering-decision"
+      ]
+    },
+    {
+      "title": "Frontend & UI",
+      "description": "Patterns for purposeful micro-animations and flicker-free optimistic UI updates.",
+      "skills": [
+        "micro-animation",
+        "optimistic-ui"
+      ]
+    }
+  ]
+}
