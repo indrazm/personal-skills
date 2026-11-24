@@ -90,6 +90,16 @@ Records, updates, and supersedes engineering and architectural decisions in `doc
 - Evaluating trade-offs between engineering approaches
 - Superseding, deprecating, or canceling a prior decision
 
+#### `oxlint-setup`
+
+Sets up and maintains the standard Bun + `oxlint` + `oxfmt` configuration and custom 14-rule JS plugin (`zstack/*`) bundled in `assets/oxlint/`, with `scripts/apply-oxlint.sh` for scaffolding into any repository.
+
+**Use when:**
+
+- Bootstrapping strict linting and formatting in a TypeScript/Bun repo
+- Migrating from ESLint/Prettier to `oxlint` and `oxfmt`
+- Adding or testing custom JS oxlint rules
+
 #### `optimize-ci` *(manual invocation only)*
 
 Audits the last 150 GitHub Actions runs via `scripts/audit_ci.sh` and optimizes CI pipelines toward sub-1-minute p50 and sub-2-minute p95 PR checks without hiding failures or reducing coverage. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
@@ -99,6 +109,16 @@ Audits the last 150 GitHub Actions runs via `scripts/audit_ci.sh` and optimizes 
 - Explicitly invoked to audit and speed up repository CI pipelines
 
 ### Frontend & UI
+
+#### `cheap-ui-audit`
+
+Audits frontend components, pages, and screenshots for visual signals that make a UI look cheap or unpolished across layout discipline, micro-consistency, typography, color restraint, and edge-case states, returning prioritized CSS/Tailwind fixes. Includes `references/cheap-ui-signals.md`.
+
+**Use when:**
+
+- Auditing a component, page, or screenshot for visual polish
+- Fixing generic, cluttered, or inconsistent Tailwind/CSS styling
+- Checking edge-case states (empty, loading, error, overflow, focus)
 
 #### `micro-animation`
 
@@ -133,6 +153,10 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   └── scripts/
     │       ├── pre-push-hook.sh
     │       └── verify.sh
+    ├── cheap-ui-audit/
+    │   ├── SKILL.md
+    │   └── references/
+    │       └── cheap-ui-signals.md
     ├── code-review/
     │   ├── SKILL.md
     │   └── references/
@@ -159,6 +183,14 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
     │   ├── SKILL.md
     │   └── scripts/
     │       └── audit_ci.sh
+    ├── oxlint-setup/
+    │   ├── SKILL.md
+    │   ├── assets/
+    │   │   ├── .oxfmtrc.json
+    │   │   ├── .oxlintrc.json
+    │   │   └── oxlint/
+    │   └── scripts/
+    │       └── apply-oxlint.sh
     ├── test-audit/
     │   ├── SKILL.md
     │   └── references/

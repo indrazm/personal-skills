@@ -13,13 +13,15 @@
         "changes-verification",
         "create-pr",
         "engineering-decision",
+        "oxlint-setup",
         "optimize-ci"
       ]
     },
     {
       "title": "Frontend & UI",
-      "description": "Patterns for purposeful micro-animations and flicker-free optimistic UI updates.",
+      "description": "Patterns for visual polish audits, purposeful micro-animations, and flicker-free optimistic UI updates.",
       "skills": [
+        "cheap-ui-audit",
         "micro-animation",
         "optimistic-ui"
       ]
