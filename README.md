@@ -140,6 +140,26 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
 - Implementing optimistic image or attachment uploads
 - Fixing UI flickers, scroll jumps, or re-triggered animations during reconciliation
 
+### Agent Harness
+
+#### `agent-instruction-audit` *(manual invocation only)*
+
+Audits an Anvia (`@anvia/core`) `Agent` definition, `instructions`, `context`, `skills`, `middlewares`, and runtime options against core operating principles (9-rule rubric in `references/agent-instruction-principles.md`), prompt-caching hygiene, `toolConcurrency`/`maxTurns`, and tool-schema alignment, producing a concise TL;DR scorecard and prioritized gap analysis. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+
+**Use when:**
+
+- Explicitly invoked to audit or optimize an Anvia `Agent` setup or instruction builder
+- Checking prompt-caching hygiene across `instructions`, `skills`, `context`, and `onCompletionRequest` middlewares
+
+#### `agent-tool-audit` *(manual invocation only)*
+
+Audits Anvia (`@anvia/core`) `createTool` definitions, handlers, `outputSchema` shapes, and `onToolOutput` middlewares against plain-text formatting conventions (canonical TypeScript templates in `references/format-examples.md`), metadata separation via `lifecycle`/`observability`/`emitStreamEvent`, line-number anchoring, and truncation guardrails, plus a reusable Anvia-aware invariant guard in `scripts/assert-plain-text-output.js`. Marked `disable-model-invocation: true` so agents do not auto-invoke it.
+
+**Use when:**
+
+- Explicitly invoked to audit existing Anvia tools and `onToolOutput` middlewares for token efficiency and LLM readability
+- Verifying return shapes (`string` / `ToolOutput.content` vs. JSON), `handler` migration, `requiresApproval`, and truncation guardrails
+
 ## Repository Structure
 
 ```text
@@ -148,6 +168,16 @@ Implements optimistic UI updates for mutations (sending messages, editing items,
 ├── README.md
 ├── skills.sh.json
 └── skills/
+    ├── agent-instruction-audit/
+    │   ├── SKILL.md
+    │   └── references/
+    │       └── agent-instruction-principles.md
+    ├── agent-tool-audit/
+    │   ├── SKILL.md
+    │   ├── references/
+    │   │   └── format-examples.md
+    │   └── scripts/
+    │       └── assert-plain-text-output.js
     ├── changes-verification/
     │   ├── SKILL.md
     │   └── scripts/

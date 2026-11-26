@@ -25,6 +25,14 @@
         "micro-animation",
         "optimistic-ui"
       ]
+    },
+    {
+      "title": "Agent Harness",
+      "description": "Audits for Anvia (@anvia/core) agent instructions, prompt-caching hygiene, and plain-text tool outputs.",
+      "skills": [
+        "agent-instruction-audit",
+        "agent-tool-audit"
+      ]
     }
   ]
 }
