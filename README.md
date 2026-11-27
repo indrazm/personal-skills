@@ -61,6 +61,16 @@ Audits, gates, and prunes unit and E2E tests so suites only keep meaningful, cri
 - Writing, changing, or reviewing unit or E2E tests
 - Auditing or pruning low-value, flaky, or change-detector tests from a codebase
 
+#### `formal-verification`
+
+Guides selective, cost-aware formal verification using Dafny (with explicit tool boundaries for TLA+/Quint and cheaper testing layers). Enforces a 4-question authoring gate, explicit production integration modes to prevent model–code drift, real-world state-machine proof patterns in `references/dafny-patterns.md`, proof debugging tactics in `references/proof-debugging.md`, and deterministic soundness + verification gating via `scripts/verify-dafny.sh`.
+
+**Use when:**
+
+- Writing, auditing, or debugging `.dfy` specifications and proofs
+- Formally verifying high-blast-radius invariants, financial/ledger rules, authorization logic, or state machines
+- Connecting a verified formal core or executable oracle to production code
+
 #### `changes-verification`
 
 Enforces deterministic pre-PR verification by discovering changed files and CI workflows, running change-related tests and locally runnable CI checks via `scripts/verify.sh`, and writing a commit-bound verification receipt enforced by `scripts/pre-push-hook.sh`.
@@ -201,6 +211,13 @@ Audits Anvia (`@anvia/core`) `createTool` definitions, handlers, `outputSchema` 
     │   │   └── adr-template.md
     │   └── scripts/
     │       └── adr.sh
+    ├── formal-verification/
+    │   ├── SKILL.md
+    │   ├── references/
+    │   │   ├── dafny-patterns.md
+    │   │   └── proof-debugging.md
+    │   └── scripts/
+    │       └── verify-dafny.sh
     ├── micro-animation/
     │   ├── SKILL.md
     │   └── references/

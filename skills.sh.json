@@ -10,6 +10,7 @@
         "code-review",
         "debugging",
         "test-audit",
+        "formal-verification",
         "changes-verification",
         "create-pr",
         "engineering-decision",
